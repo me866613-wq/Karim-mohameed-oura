@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>كريم قورة | المبرمج المحترف</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --main-color: #007bff;
+            --secondary-color: #00d4ff;
+            --dark-bg: #050505;
+            --card-bg: #0f0f0f;
+            --text-color: #ffffff;
+            --gray-text: #b0b0b0;
+            --glow: 0 0 25px rgba(0, 123, 255, 0.25);
+            --star-color: #ffcc00;
+        }
+
+        /* الكود السحري لمنع التحديد الأزرق على الكلام والصور */
+        * { 
+            scroll-behavior: smooth; 
+            box-sizing: border-box; 
+            -webkit-tap-highlight-color: transparent; /* يمنع الومضة الزرقاء عند النقر */
+            -webkit-touch-callout: none; /* يمنع قائمة "نسخ" و "حفظ الصورة" */
+            user-select: none; /* يمنع تحديد الكلام تماماً */
+            -webkit-user-select: none; 
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+
+        body {
+            margin: 0; padding: 0;
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        .bg-glow {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 10% 10%, rgba(0, 123, 255, 0.05) 0%, transparent 50%),
+                        radial-gradient(circle at 90% 90%, rgba(0, 212, 255, 0.05) 0%, transparent 50%);
+            z-index: -1;
+        }
+
+        .hero {
+            height: 100vh; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; text-align: center;
+        }
+
+        .profile-wrapper { position: relative; width: 230px; height: 230px; margin-bottom: 25px; }
+        .morphing-shape {
+            position: absolute; width: 100%; height: 100%;
+            background: linear-gradient(45deg, var(--main-color), var(--secondary-color));
+            animation: morphRotate 8s ease-in-out infinite; z-index: 1;
+            box-shadow: var(--glow);
+        }
+
+        .profile-img {
+            position: absolute; top: 10px; left: 10px; width: 210px; height: 210px;
+            object-fit: cover; z-index: 2; border-radius: 50%; border: 6px solid var(--dark-bg);
+        }
+
+        @keyframes morphRotate {
+            0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+            50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; transform: scale(1.05); }
+        }
+
+        h1 { font-size: 3.5rem; margin: 0; font-weight: 900; }
+        .job-title { color: var(--main-color); font-size: 1.4rem; margin: 10px 0; font-weight: bold; }
+
+        .social-links { margin-top: 15px; }
+        .social-links a {
+            color: white; font-size: 1.8rem; margin: 0 15px;
+            transition: 0.3s; display: inline-block;
+        }
+        .social-links a:hover { color: var(--main-color); transform: translateY(-5px); }
+
+        .container { width: 92%; max-width: 1200px; margin: auto; padding: 80px 0; }
+        .section-title { text-align: center; margin-bottom: 70px; font-size: 2.5rem; font-weight: 900; position: relative; }
+        .section-title::after { content: ''; width: 60px; height: 4px; background: var(--main-color); position: absolute; bottom: -15px; left: 50%; transform: translateX(-50%); }
+
+        /* معرض الأعمال */
+        .portfolio-gallery { display: flex; width: 100%; height: 500px; gap: 15px; }
+        .card {
+            flex: 1; height: 100%; border-radius: 30px; cursor: pointer; overflow: hidden;
+            position: relative; transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+            border: 2px solid #222;
+        }
+        .card img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.4) grayscale(100%); transition: 0.5s; }
+        .card.active { flex: 12; border-color: var(--main-color); box-shadow: var(--glow); }
+        .card.active img { filter: brightness(1) grayscale(0%); }
+        .card:not(.active) { flex: 0.4; }
+
+        /* آراء العملاء الـ 7 */
+        .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; }
+        .testimonial-card {
+            background: var(--card-bg); padding: 30px; border-radius: 25px;
+            border: 1px solid #1a1a1a; transition: 0.4s;
+        }
+        .testimonial-card:hover { border-color: var(--main-color); }
+        .testimonial-card p { line-height: 1.7; color: var(--gray-text); font-style: italic; }
+        .client-name { display: block; margin-top: 15px; font-weight: bold; color: var(--main-color); }
+
+        /* استطلاع الرأي */
+        .survey-box {
+            background: #0a0a0a; border-radius: 40px; padding: 50px;
+            text-align: center; border: 2px dashed #222; margin-top: 100px;
+        }
+        .stars-wrapper { display: flex; flex-direction: row-reverse; justify-content: center; gap: 15px; margin-top: 25px; }
+        .stars-wrapper input { display: none; }
+        .stars-wrapper label { font-size: 3rem; color: #222; cursor: pointer; transition: 0.3s; }
+        .stars-wrapper label:hover, .stars-wrapper label:hover ~ label, .stars-wrapper input:checked ~ label { color: var(--star-color); }
+
+        /* التواصل */
+        .contact-box {
+            background: #0f0f0f; padding: 60px 40px; border-radius: 40px; text-align: center;
+            border: 1px solid var(--main-color); margin-top: 100px;
+        }
+        .contact-info { margin: 20px 0; font-size: 1.2rem; }
+        .contact-info p { margin: 10px 0; color: var(--gray-text); }
+        .btn-call {
+            padding: 18px 50px; background: var(--main-color); color: white;
+            text-decoration: none; border-radius: 50px; font-weight: 900;
+            display: inline-block; transition: 0.4s;
+        }
+
+        footer { text-align: center; padding: 40px; color: #444; border-top: 1px solid #111; }
+    </style>
+</head>
+<body oncontextmenu="return false;">
+
+    <div class="bg-glow"></div>
+
+    <section class="hero">
+        <div class="profile-wrapper" data-aos="zoom-in">
+            <div class="morphing-shape"></div>
+            <img src="https://i.ibb.co/BKHrxbG9/IMG-20251121-WA0184.jpg" class="profile-img" alt="كريم قورة">
+        </div>
+        <h1 data-aos="fade-up">كريم محمد قورة</h1>
+        <div class="job-title" data-aos="fade-up" data-aos-delay="200">Creative Full-Stack Developer</div>
+        
+        <div class="social-links" data-aos="fade-up" data-aos-delay="400">
+            <a href="https://www.facebook.com/share/1Bui8WnKjp/" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://www.instagram.com/kareemmohameed24" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.youtube.com/@karimpro-v4x" target="_blank"><i class="fab fa-youtube"></i></a>
+        </div>
+    </section>
+
+    <div class="container">
+        <section id="portfolio" data-aos="fade-up">
+            <h2 class="section-title">معرض الأعمال</h2>
+            <div class="portfolio-gallery">
+                <div class="card active"><img src="https://i.ibb.co/fVCd8P1K/Screenshot-Chrome.jpg"></div>
+                <div class="card"><img src="https://i.ibb.co/XfHVLqmm/Screenshot-Chrome.jpg"></div>
+                <div class="card"><img src="https://i.ibb.co/Dy95Vsf/Screenshot-Chrome.jpg"></div>
+                <div class="card"><img src="https://i.ibb.co/whLqGywx/Screenshot-Chrome.jpg"></div>
+                <div class="card"><img src="https://i.ibb.co/p6d82Jcq/Screenshot-Chrome.jpg"></div>
+                <div class="card"><img src="https://i.ibb.co/0jdzpSNN/Screenshot-Chrome.jpg"></div>
+            </div>
+        </section>
+
+        <section style="margin-top: 150px;" data-aos="fade-up">
+            <h2 class="section-title">قالوا عني</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card"><p>"كريم مبدع جداً، قام بتطوير تطبيق هداء المسلم بأداء يفوق التوقعات."</p><span class="client-name">- أحمد الشريف</span></div>
+                <div class="testimonial-card"><p>"من أفضل المبرمجين التزاماً بالمواعيد ودقة في التنفيذ."</p><span class="client-name">- محمد جابر</span></div>
+                <div class="testimonial-card"><p>"حاسبة المواريث كانت دقيقة جداً وسهلة الاستخدام."</p><span class="client-name">- سليمان العودة</span></div>
+                <div class="testimonial-card"><p>"تصميمات عصرية وتناسب معايير الويب الحديثة."</p><span class="client-name">- هاني فيصل</span></div>
+                <div class="testimonial-card"><p>"السرعة في الرد والاحترافية هي أكثر ما يميز كريم."</p><span class="client-name">- ياسين القحطاني</span></div>
+                <div class="testimonial-card"><p>"قام بتحويل فكرة موقعنا إلى واقع بلمسة فنية رائعة."</p><span class="client-name">- فاطمة علي</span></div>
+                <div class="testimonial-card"><p>"مبرمج يفهم احتياجات العميل من أول مرة."</p><span class="client-name">- خالد منصور</span></div>
+            </div>
+        </section>
+
+        <section class="survey-box" data-aos="zoom-in">
+            <h2 class="section-title">تقييمك للخدمة</h2>
+            <div class="stars-wrapper">
+                <input type="radio" name="star" id="star5" value="5"><label for="star5" class="fas fa-star"></label>
+                <input type="radio" name="star" id="star4" value="4"><label for="star4" class="fas fa-star"></label>
+                <input type="radio" name="star" id="star3" value="3"><label for="star3" class="fas fa-star"></label>
+                <input type="radio" name="star" id="star2" value="2"><label for="star2" class="fas fa-star"></label>
+                <input type="radio" name="star" id="star1" value="1"><label for="star1" class="fas fa-star"></label>
+            </div>
+            <div id="feedback-result" style="margin-top: 20px; font-weight: bold; color: var(--main-color);"></div>
+        </section>
+
+        <section class="contact-box" data-aos="zoom-in">
+            <h2>لنبدأ مشروعك القادم</h2>
+            <div class="contact-info">
+                <p><i class="fas fa-phone"></i> +201558179388</p>
+                <p><i class="fas fa-envelope"></i> km2071614@gmail.com</p>
+            </div>
+            <a href="https://wa.me/201558179388" class="btn-call">واتساب مباشر</a>
+        </section>
+    </div>
+
+    <footer>&copy; 2026 كريم محمد قورة</footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1000, once: true });
+        const cards = document.querySelectorAll('.card');
+        cards.forEach(card => {
+            card.addEventListener('click', () => {
+                cards.forEach(c => c.classList.remove('active'));
+                card.classList.add('active');
+            });
+        });
+
+        const stars = document.querySelectorAll('.stars-wrapper input');
+        const feedback = document.getElementById('feedback-result');
+        stars.forEach(star => {
+            star.addEventListener('change', () => {
+                const msgs = ['سنعمل للتحسن', 'نهتم بملاحظاتك', 'سعداء بخدمتك', 'شكراً لتقييمك', 'أنت عميل رائع'];
+                feedback.innerText = msgs[star.value - 1];
+            });
+        });
+
+        document.addEventListener('contextmenu', e => e.preventDefault());
+    </script>
+</body>
+</html>
